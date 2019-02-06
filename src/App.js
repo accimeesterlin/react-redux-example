@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux'
 import './App.css';
+import { addAppointment, getGithubUsernane } from './actions/index';
+
 
 class App extends Component {
+  componentDidMount = () => {
+    console.log('Data: ', this.props);
+    // this.props.addAppointment('Peter Parker');
+    this.props.getGithubUsernane('accimeesterlin');
+
+  }
+
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Welcome to my App</h1>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    addAppointment: (name) => dispatch(addAppointment(name)),
+    getGithubUsernane: (username) => dispatch(getGithubUsernane(username))
+  };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
